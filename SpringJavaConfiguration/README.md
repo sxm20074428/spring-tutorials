@@ -7,7 +7,7 @@ Template example for Spring 4 MVC + RESTful Service with pure Java Configuration
 
 ###2. To Run this project locally
 ```shell
-$ git clone https://github.com/viralpatel/spring4-restful-example
+$ git clone https://github.com/sxm20074428/spring-tutorials/tree/master/SpringJavaConfiguration
 $ mvn tomcat7:run
 ```
 Access ```http://localhost:8080/springrest/customers```
