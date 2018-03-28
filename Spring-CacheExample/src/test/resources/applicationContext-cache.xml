@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <!-- 注解扫描路径 -->
+    <context:component-scan base-package="cache.ordinary"/>
+
+    <cache:annotation-driven/>
+
+    <!--spring的缓存管理器-->
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+                    <property name="name" value="accountCache"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
+
+    <!--自定义缓存管理器-->
+    <!--<bean id="cacheManager" class="cache.manager.MyCacheManager">-->
+    <!--<property name="caches">-->
+    <!--<set>-->
+    <!--<bean class="cache.manager.MyCache">-->
+    <!--<property name="name" value="accountCache"/>-->
+    <!--</bean>-->
+    <!--</set>-->
+    <!--</property>-->
+    <!--</bean>-->
+
+</beans>

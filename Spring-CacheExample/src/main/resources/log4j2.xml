@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration shutdownHook="disable">
+    <!--%m 输出代码中指定的消息-->
+    <!--%p 输出优先级，即 DEBUG ， INFO ， WARN ， ERROR ， FATAL-->
+    <!--%c 输出打了Log的类名，%c{1}从类名开始输出一个-->
+    <!--%n 输出一个回车换行符， Windows 平台为 “rn”,Unix 平台为 “n”-->
+    <properties>
+        <property name="logDir">e:logs</property>
+        <property name="pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %m%n</property>
+    </properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5p] - %m%n"/>
+        </Console>
+
+    </Appenders>
+
+    <Loggers>
+
+        <!-- 3rdparty Loggers -->
+        <logger name="org.springframework" level="off"/>
+        <!-- Root Logger -->
+        <!--日志级别从低到高依次为：TRACE、DEBUG、INFO、WARN、ERROR和FATAL；关闭日志off-->
+        <Root level="DEBUG">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
