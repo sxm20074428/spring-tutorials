@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 激活 Spring MVC Controller programming model -->
+    <mvc:annotation-driven/>
+
+    <!-- Enable AspectJ style of Spring AOP -->
+    <aop:aspectj-autoproxy/>
+
+    <!-- 对包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
+    <context:component-scan base-package="com.spring.controller.log">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- Configure Employee Bean and initialize it -->
+    <bean name="employee" class="com.spring.domain.Employee">
+        <property name="name" value="sxm Name"></property>
+    </bean>
+
+    <!-- Configure EmployeeService bean -->
+    <bean name="employeeService" class="com.spring.service.impl.EmployeeServiceImpl">
+        <property name="employee" ref="employee"></property>
+    </bean>
+
+    <!-- Configure Aspect Beans, without this Aspects advices won't execute -->
+    <!--<bean name="employeeBeforeAspect" class="com.spring.aspect.employee.EmployeeBeforeAspect"/>-->
+    <!--<bean name="employeeAspectPointcut" class="com.spring.aspect.employee.EmployeeAspectPointcut"/>-->
+    <!--<bean name="employeeAspectJoinPoint" class="com.spring.aspect.employee.EmployeeAspectJoinPoint"/>-->
+    <!--<bean name="employeeAfterAspect" class="com.spring.aspect.employee.EmployeeAfterAspect"/>-->
+    <!--<bean name="employeeAroundAspect" class="com.spring.aspect.employee.EmployeeAroundAspect"/>-->
+    <!--<bean name="employeeAnnotationAspect" class="com.spring.aspect.employee.EmployeeAnnotationAspect"/>-->
+
+    <!--<bean name="employeeXMLConfigAspect" class="com.spring.aspect.employee.EmployeeXMLConfigAspect"/>-->
+    <!-- Spring AOP XML Configuration -->
+    <!--<aop:config>-->
+        <!--<aop:aspect ref="employeeXMLConfigAspect">-->
+            <!--<aop:pointcut expression="execution(* com.spring.domain.Employee.getName())" id="getNamePointcut"/>-->
+            <!--<aop:around method="employeeAroundAdvice" pointcut-ref="getNamePointcut" arg-names="proceedingJoinPoint"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+    <!-- 日志注解 -->
+    <bean id="LogAspect" class="com.spring.aspect.log.OperateLogAspect"/>
+    <!--<bean id="apiLogAspect" class="com.spring.aspect.log.ApiLogAspect"/>-->
+
+</beans>
